@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Service
@@ -36,6 +35,11 @@ public class NurseService {
                     .birth(patient.getBirth())
                     .gender(patient.isGender())
                     .phone(patient.getPhone())
+                    .recognitionId(patient.getRecognitionId())
+                    .note(patient.getNote())
+                    .issuanceId(patient.getIssuanceId())
+                    .emergence(patient.isEmergence())
+                    .grade(patient.getGrade())
                     .build();
 
             patientDTOList.add(eachPatient);
@@ -56,6 +60,11 @@ public class NurseService {
                     .birth(patient.getBirth())
                     .gender(patient.isGender())
                     .phone(patient.getPhone())
+                    .grade(patient.getGrade())
+                    .emergence(patient.isEmergence())
+                    .issuanceId(patient.getIssuanceId())
+                    .note(patient.getNote())
+                    .recognitionId(patient.getRecognitionId())
                     .build();
 
             patientDTOList.add(eachPatient);
@@ -77,6 +86,11 @@ public class NurseService {
                         .birth(patient.getBirth())
                         .gender(patient.isGender())
                         .phone(patient.getPhone())
+                        .grade(patient.getGrade())
+                        .emergence(patient.isEmergence())
+                        .issuanceId(patient.getIssuanceId())
+                        .note(patient.getNote())
+                        .recognitionId(patient.getRecognitionId())
                         .build();
 
                 emergencePatients.add(eachPatient);
@@ -109,26 +123,24 @@ public class NurseService {
         Patient patient = patientRepository.findPatientByPatientId(patientId);
 
         List<InstructionDTO> orders = new ArrayList<>();
-        for(Instruction instruction : instructionRepository.findInstructionByPatientId(patient.getPatientId())) {
+        for(Instruction instruction : patient.getInstructions()) {
 
-            List<InstructionDetailDTO> details = new ArrayList<>();
-            for(InstructionDetail instructionDetail :instructionDetailRepository.findInstructionDetailByInstructionId(
-                    instruction.getInstructionId())){
-                InstructionDetailDTO detailDTO = InstructionDetailDTO.builder()
-                        .instructionDetailId(instructionDetail.getInstructionDetailId())
-                        .check(instructionDetail.getCheck())
-                        .build();
-
-                details.add(detailDTO);
-            }
+//            List<InstructionDetailDTO> details = new ArrayList<>();
+//            for(InstructionDetail instructionDetail : instruction.getInstructionDetails()){
+//                InstructionDetailDTO detailDTO = InstructionDetailDTO.builder()
+//                        .instructionDetailId(instructionDetail.getInstructionDetailId())
+//                        .check(instructionDetail.getCheck())
+//                        .build();
+//
+//                details.add(detailDTO);
+//            }
 
             InstructionDTO instructionDTO = InstructionDTO.builder()
-                    .patientId(instruction.getPatientId())
                     .instructionId(instruction.getInstructionId())
                     .date(instruction.getDate())
                     .disease(instruction.getDisease())
                     .examine(instruction.getExamine())
-                    .instructionDetails(details)
+//                    .instructionDetails(details)
                     .injection(instruction.getInjection())
                     .medicine(instruction.getMedicine())
                     .note(instruction.getNote())
@@ -143,12 +155,20 @@ public class NurseService {
         return orders;
     }
 
-    public List<DocumentDTO> getDocument(Long patientId){
+    public List<DocumentDTO> getDocuments(Long patientId){
         List<DocumentDTO> documents = new ArrayList<>();
 
-        for(Document document : documentRepository.findDocumentByPatientId(patientId)) {
+        for(Document document : patientRepository.findPatientByPatientId(patientId).getDocuments()) {
             DocumentDTO documentDTO = DocumentDTO.builder()
-                    .patientId(document.getPatientId())
+                    .bodyCare(document.getBodyCare())
+                    .DocumentId(document.getDocumentId())
+                    .counseling(document.getCounseling())
+                    .date(document.getDate())
+                    .diseaseCare(document.getDiseaseCare())
+                    .excretionCare(document.getExcretionCare())
+                    .note(document.getNote())
+                    .nutritionCare(document.getNutritionCare())
+                    .recognitionCare(document.getRecognitionCare())
                     .build();
 
             documents.add(documentDTO);

@@ -19,8 +19,6 @@ public class Instruction {
     @Column(name = "INSTRUCTION_ID")
     private Long instructionId;
 
-    private Long patientId;
-
     private boolean visit;
 
     private String disease;

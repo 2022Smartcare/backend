@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface InstructionRepository extends JpaRepository<Instruction, Long> {
 
-    List<Instruction> findInstructionByPatientId(Long patientId);
+    List<Instruction> findInstructionByInstructionId(Long instructionId);
 
 }

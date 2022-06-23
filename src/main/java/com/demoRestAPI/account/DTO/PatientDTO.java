@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
 public class PatientDTO {
     Long patientId;
     String name;
-    LocalDateTime birth;
+    String birth;
     Boolean gender;
     String phone;
     boolean emergence;
     String issuanceId;
     String recognitionId;
-    Integer grade;
+    int grade;
     String note;
 }

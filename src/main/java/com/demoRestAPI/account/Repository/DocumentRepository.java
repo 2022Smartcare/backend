@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface DocumentRepository extends JpaRepository<Document, Long> {
-    List<Document> findDocumentByPatientId(Long patientId);
+    List<Document> findDocumentByDocumentId(Long documentId);
 }

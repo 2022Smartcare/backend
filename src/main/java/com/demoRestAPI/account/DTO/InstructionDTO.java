@@ -13,7 +13,6 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 public class InstructionDTO {
     Long instructionId;
-    Long patientId;
     boolean visit;
     String disease;
     String request;

@@ -23,7 +23,7 @@ public class Patient {
 
     private String phone;
 
-    private LocalDateTime birth;
+    private String birth;
 
     private boolean emergence;
 
@@ -36,13 +36,13 @@ public class Patient {
     private String note;
 
     @OneToMany
-    @JoinTable(name = "PAPER",
+    @JoinTable(name = "PATIENT_INSTRUCTION",
             joinColumns = @JoinColumn(name="PATIENT_ID"),
             inverseJoinColumns = @JoinColumn(name="INSTRUCTION_ID"))
     private List<Instruction> instructions = new ArrayList<>();
 
     @OneToMany
-    @JoinTable(name = "MATCHED",
+    @JoinTable(name = "PATIENT_DOCUMENT",
             joinColumns = @JoinColumn(name="PATIENT_ID"),
             inverseJoinColumns = @JoinColumn(name="DOCUMENT_ID")
     )

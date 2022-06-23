@@ -1,7 +1,9 @@
 package com.demoRestAPI.account;
 
+import com.demoRestAPI.account.DTO.DocumentDTO;
 import com.demoRestAPI.account.DTO.InstructionDTO;
 import com.demoRestAPI.account.DTO.PatientDTO;
+import com.demoRestAPI.account.Entity.Document;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +35,13 @@ public class NurseController {
 
     @GetMapping("/order")
     @ResponseBody
-    public List<InstructionDTO> showOrders(@RequestParam("patientId") Long patientId){
+    public List<InstructionDTO> showInstructions(@RequestParam("patientId") Long patientId){
         return nurseService.getInstructions(patientId);
+    }
+
+    @GetMapping("/document")
+    @ResponseBody
+    public List<DocumentDTO> showDocuments(@RequestParam("patientId") Long patientId){
+        return nurseService.getDocuments(patientId);
     }
 }

@@ -19,8 +19,6 @@ public class Document {
     @Column(name = "DOCUMENT_Id")
     private Long documentId;
 
-    private Long patientId;
-
     private LocalDateTime date;
 
     private Integer diseaseCare;
